@@ -1,0 +1,24 @@
+﻿@model ProdottoViewModel
+
+<h1>Ecco i dettagli del prodotto</h1>
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Codice</th>
+            <th scope="col">Descrizione</th>
+            <th scope="col">Tipologia</th>
+            <th scope="col">Prezzo al pubblico</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Model.Codice</td>
+            <td>@Model.Descrizione</td>
+            <td>@Model.Tipologia</td>
+            <td>@Model.PrezzoPubblico</td>
+        </tr>
+    </tbody>
+</table>

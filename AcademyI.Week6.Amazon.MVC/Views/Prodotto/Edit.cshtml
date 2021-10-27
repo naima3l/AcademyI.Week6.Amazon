@@ -1,0 +1,37 @@
+﻿@model ProdottoViewModel
+<h1>Modifica prodotto</h1>
+
+<form method="post">
+    <div class="mb-3">
+        <label asp-for="Codice" class="form-label"></label>
+        <input type="text" class="form-control" readonly asp-for="Codice" placeholder="Inserisci codice">
+        <span asp-validation-for="Codice" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Descrizione" class="form-label"></label>
+        <input type="text" class="form-control" asp-for="Descrizione" placeholder="Inserisci descrizione">
+        <span asp-validation-for="Descrizione" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Tipologia" class="form-label"></label>
+        <select asp-for="Tipologia" asp-items="@ViewBag.Tipologia" class="form-control">
+            <option value="">Selezionare un'opzione...</option>
+        </select>
+        <span asp-validation-for="Tipologia" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="PrezzoPubblico" class="form-label"></label>
+        <input type="number" class="form-control" asp-for="PrezzoPubblico" placeholder="Inserisci il prezzo al pubblico">
+        <span asp-validation-for="PrezzoPubblico" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="PrezzoFornitore" class="form-label"></label>
+        <input type="number" class="form-control" asp-for="PrezzoFornitore" placeholder="Inserisci il prezzo al fornitore">
+        <span asp-validation-for="PrezzoFornitore" class="text-danger"></span>
+    </div>
+
+    <input type="submit" value="Inserisci" class="btn btn-primary" />
+    <input type="reset" value="Reset" class="btn btn-danger" />
+    <a class="btn btn-primary" asp-action="Index" role="button">Back</a>
+</form>
+
