@@ -78,6 +78,12 @@ namespace AcademyI.Week6.Amazon.MVC.Controllers
             return View();
         }
 
+        public async Task<IActionResult> LogoutAsync()
+        {
+            await HttpContext.SignOutAsync();
+            return Redirect("/");
+        }
+
         public IActionResult Forbidden() => View();
         //{
         //    return View();
