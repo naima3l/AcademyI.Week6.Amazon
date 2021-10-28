@@ -1,4 +1,5 @@
-﻿using AcademyI.Week6.Amazon.CORE.Repositories;
+﻿using AcademyI.Week6.Amazon.CORE.Models;
+using AcademyI.Week6.Amazon.CORE.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +11,12 @@ namespace AcademyI.Week6.Amazon.CORE.BusinessLayer
     public class MainBusinessLayer : IBusinessLayer
     {
         private readonly IProdottoRepository prodottiRepo;
+        private readonly IUtentiRepository utentiRepo;
 
-        public MainBusinessLayer(IProdottoRepository prodottiRepository)
+        public MainBusinessLayer(IProdottoRepository prodottiRepository, IUtentiRepository utentiRepository)
         {
             prodottiRepo = prodottiRepository;
+            utentiRepo = utentiRepository;
         }
 
         public bool Create(Prodotto item)
@@ -48,6 +51,15 @@ namespace AcademyI.Week6.Amazon.CORE.BusinessLayer
 
             prodottiRepo.Update(item);
             return true;
+        }
+
+        public Utente GetAccount(string username)
+        {
+            if (string.IsNullOrEmpty(username))
+            {
+                return null;
+            }
+            return utentiRepo.GetByUsername(username);
         }
 
         public List<Prodotto> GetAll()

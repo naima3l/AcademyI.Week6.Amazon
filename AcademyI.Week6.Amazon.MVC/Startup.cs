@@ -2,6 +2,7 @@ using AcademyI.Week6.Amazon.CORE.BusinessLayer;
 using AcademyI.Week6.Amazon.CORE.Repositories;
 using AcademyI.Week6.Amazon.EF;
 using AcademyI.Week6.Amazon.EF.RepositoriesEF;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -33,12 +34,21 @@ namespace AcademyI.Week6.Amazon.MVC
             services.AddTransient<IBusinessLayer, MainBusinessLayer>();
 
             services.AddScoped<IProdottoRepository, RepositoryProdottiEF>();
+            services.AddScoped<IUtentiRepository, RepositoryUtentiEF>();
 
             //CONNECTION STRING
             services.AddDbContext<AmazonContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("EFConnection"));
             });
+
+            //AUTHENTICATION
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(option =>
+                {
+                    option.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Utenti/Login");
+                    option.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/Utenti/Forbidden");
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,6 +68,8 @@ namespace AcademyI.Week6.Amazon.MVC
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

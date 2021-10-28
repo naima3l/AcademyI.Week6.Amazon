@@ -1,6 +1,7 @@
 ﻿using AcademyI.Week6.Amazon.CORE.BusinessLayer;
 using AcademyI.Week6.Amazon.MVC.Helper;
 using AcademyI.Week6.Amazon.MVC.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
@@ -42,13 +43,14 @@ namespace AcademyI.Week6.Amazon.MVC.Controllers
         }
 
         //add
-
+        [Authorize(Policy = "Adm")] //non solo chiede il login/autenticazione ma richiede che il ruolo sia Administrator
         [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
 
+        [Authorize(Policy = "Adm")] //non solo chiede il login/autenticazione ma richiede che il ruolo sia Administrator
         [HttpPost]
         public IActionResult Create(ProdottoViewModel prodottoViewModel)
         {
@@ -62,6 +64,7 @@ namespace AcademyI.Week6.Amazon.MVC.Controllers
         }
 
         //Edit
+        [Authorize(Policy = "Adm")] //non solo chiede il login/autenticazione ma richiede che il ruolo sia Administrator
         [HttpGet]
         public IActionResult Edit(string id)
         {
@@ -71,6 +74,7 @@ namespace AcademyI.Week6.Amazon.MVC.Controllers
         }
 
         [HttpPost]
+        [Authorize(Policy = "Adm")] //non solo chiede il login/autenticazione ma richiede che il ruolo sia Administrator
         public IActionResult Edit(ProdottoViewModel prodottoViewModel)
         {
             var prodotto = prodottoViewModel.toProdotto();
@@ -85,6 +89,7 @@ namespace AcademyI.Week6.Amazon.MVC.Controllers
         }
 
         //Delete
+        [Authorize(Policy = "Adm")] //non solo chiede il login/autenticazione ma richiede che il ruolo sia Administrator
         public IActionResult Delete(string id)
         {
             var prodotto = BL.GetAll().FirstOrDefault(p => p.Codice == id);
@@ -93,6 +98,7 @@ namespace AcademyI.Week6.Amazon.MVC.Controllers
         }
 
         [HttpPost]
+        [Authorize(Policy = "Adm")] //non solo chiede il login/autenticazione ma richiede che il ruolo sia Administrator
         public IActionResult Delete(ProdottoViewModel prodottoViewModel)
         {
             var prodotto = prodottoViewModel.toProdotto();

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AcademyI.Week6.Amazon.CORE.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,5 +16,7 @@ namespace AcademyI.Week6.Amazon.CORE.BusinessLayer
         public bool Edit(Prodotto item);
 
         public bool DeleteByCode(string cod);
+
+        public Utente GetAccount(string username); //user
     }
 }

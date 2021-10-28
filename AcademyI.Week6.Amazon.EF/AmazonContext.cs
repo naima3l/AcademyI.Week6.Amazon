@@ -1,4 +1,5 @@
 ﻿using AcademyI.Week6.Amazon.CORE;
+using AcademyI.Week6.Amazon.CORE.Models;
 using AcademyI.Week6.Amazon.EF.Configurations;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -8,6 +9,7 @@ namespace AcademyI.Week6.Amazon.EF
     public class AmazonContext : DbContext
     {
         public DbSet<Prodotto> Prodotti { get; set; }
+        public DbSet<Utente> Utenti { get; set; }
 
         public AmazonContext()
         {
@@ -28,6 +30,7 @@ namespace AcademyI.Week6.Amazon.EF
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration<Prodotto>(new ProdottoConfiguration());
+            modelBuilder.ApplyConfiguration<Utente>(new UtenteConfiguration());
         }
     }
 }
